@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="acun" default="all">
+  
+  
+  <property file="acun.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+    <include name="*.ear"/>
+    <include name="*.klib"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="lib/ant-javafx.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javafx-mx.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/packager.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="lib/tools.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.maven:_com.datastax.cassandra:cassandra-driver-core:3.6.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/datastax/cassandra/cassandra-driver-core/3.6.0/cassandra-driver-core-3.6.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/fasterxml/jackson/core/jackson-annotations/2.8.0/jackson-annotations-2.8.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.2.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/fasterxml/jackson/core/jackson-core/2.8.2/jackson-core-2.8.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.2.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/fasterxml/jackson/core/jackson-databind/2.8.2/jackson-databind-2.8.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.2.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.8.2/jackson-datatype-jdk8-2.8.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.jnr:jffi:1.2.16.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/github/jnr/jffi/1.2.16/jffi-1.2.16.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.jnr:jffi:native:1.2.16.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/github/jnr/jffi/1.2.16/jffi-1.2.16-native.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.jnr:jnr-constants:0.9.9.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/github/jnr/jnr-constants/0.9.9/jnr-constants-0.9.9.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.jnr:jnr-ffi:2.1.7.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/github/jnr/jnr-ffi/2.1.7/jnr-ffi-2.1.7.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.jnr:jnr-posix:3.0.44.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/github/jnr/jnr-posix/3.0.44/jnr-posix-3.0.44.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.github.jnr:jnr-x86asm:1.0.2.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/github/jnr/jnr-x86asm/1.0.2/jnr-x86asm-1.0.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.code.gson:gson:2.3.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.guava:guava:21.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/google/guava/guava/21.0/guava-21.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.google.protobuf:protobuf-java:3.5.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/google/protobuf/protobuf-java/3.5.1/protobuf-java-3.5.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.googlecode.json-simple:json-simple:1.1.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.typesafe.netty:netty-reactive-streams:2.0.0-m1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/typesafe/netty/netty-reactive-streams/2.0.0-M1/netty-reactive-streams-2.0.0-M1.jar"/>
+  </path>
+  
+  <path id="library.maven:_com.zaxxer:hikaricp:2.6.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/com/zaxxer/HikariCP/2.6.1/HikariCP-2.6.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-codec:commons-codec:1.3.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/commons-codec/commons-codec/1.3/commons-codec-1.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_commons-logging:commons-logging:1.1.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.dropwizard.metrics:metrics-core:3.2.2.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/dropwizard/metrics/metrics-core/3.2.2/metrics-core-3.2.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-buffer:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-buffer/4.1.11.Final/netty-buffer-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-codec-dns:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-codec-dns/4.1.11.Final/netty-codec-dns-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-codec-http:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-codec-http/4.1.11.Final/netty-codec-http-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-codec:4.0.56.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-codec/4.0.56.Final/netty-codec-4.0.56.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-common:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-common/4.1.11.Final/netty-common-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-handler:4.0.56.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-handler/4.0.56.Final/netty-handler-4.0.56.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-resolver-dns:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-resolver-dns/4.1.11.Final/netty-resolver-dns-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-resolver:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-resolver/4.1.11.Final/netty-resolver-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport-native-epoll:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-transport-native-epoll/4.1.11.Final/netty-transport-native-epoll-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport-native-epoll:linux-x86_64:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-transport-native-epoll/4.1.11.Final/netty-transport-native-epoll-4.1.11.Final-linux-x86_64.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport-native-unix-common:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-transport-native-unix-common/4.1.11.Final/netty-transport-native-unix-common-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_io.netty:netty-transport:4.1.11.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/io/netty/netty-transport/4.1.11.Final/netty-transport-4.1.11.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_jakarta-regexp:jakarta-regexp:1.4.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar"/>
+  </path>
+  
+  <path id="library.maven:_mysql:mysql-connector-java:5.1.41.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.bcel:bcel:5.2.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/apache/bcel/bcel/5.2/bcel-5.2.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.commons:commons-lang3:3.5.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.asynchttpclient:async-http-client-netty-utils:2.1.0-alpha19.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/asynchttpclient/async-http-client-netty-utils/2.1.0-alpha19/async-http-client-netty-utils-2.1.0-alpha19.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.asynchttpclient:async-http-client:2.1.0-alpha19.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/asynchttpclient/async-http-client/2.1.0-alpha19/async-http-client-2.1.0-alpha19.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.javassist:javassist:3.18.1-ga.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.jooq:jool:0.9.12.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/jooq/jool/0.9.12/jool-0.9.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.json:json:20141113.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/json/json/20141113/json-20141113.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mongodb:bson:3.8.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/mongodb/bson/3.8.0/bson-3.8.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mongodb:mongodb-driver-core:3.8.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/mongodb/mongodb-driver-core/3.8.0/mongodb-driver-core-3.8.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.mongodb:mongodb-driver-sync:3.8.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/mongodb/mongodb-driver-sync/3.8.0/mongodb-driver-sync-3.8.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.msgpack:msgpack:0.6.12.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/msgpack/msgpack/0.6.12/msgpack-0.6.12.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ocpsoft.prettytime:prettytime:3.2.7.final.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/ocpsoft/prettytime/prettytime/3.2.7.Final/prettytime-3.2.7.Final.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm-analysis:5.0.3.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm-commons:5.0.3.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/ow2/asm/asm-commons/5.0.3/asm-commons-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm-tree:5.0.3.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm-util:5.0.3.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/ow2/asm/asm-util/5.0.3/asm-util-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.ow2.asm:asm:5.0.3.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.reactivestreams:reactive-streams:1.0.0.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/reactivestreams/reactive-streams/1.0.0/reactive-streams-1.0.0.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar"/>
+  </path>
+  
+  <path id="library.maven:_org.slf4j:slf4j-jdk14:1.7.10.classpath">
+    <pathelement location="${path.variable.maven_reposıtory}/org/slf4j/slf4j-jdk14/1.7.10/slf4j-jdk14-1.7.10.jar"/>
+  </path>
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <fileset dir="${javac2.home}">
+      <include name="javac2.jar"/>
+      <include name="jdom.jar"/>
+      <include name="asm-all*.jar"/>
+      <include name="forms-*.jar"/>
+    </fileset>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module Acun -->
+  
+  <dirname property="module.acun.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.acun" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.acun" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.acun" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.acun" value="-encoding UTF-8 -source 8 -target 1.8 ${compiler.args}"/>
+  
+  <property name="acun.output.dir" value="${module.acun.basedir}/target/classes"/>
+  <property name="acun.testoutput.dir" value="${module.acun.basedir}/target/test-classes"/>
+  
+  <path id="acun.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="acun.module.production.classpath">
+    <path refid="${module.jdk.classpath.acun}"/>
+    <path refid="library.maven:_com.datastax.cassandra:cassandra-driver-core:3.6.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-handler:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.dropwizard.metrics:metrics-core:3.2.2.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-ffi:2.1.7.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:1.2.16.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-commons:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-analysis:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-tree:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-util:5.0.3.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-x86asm:1.0.2.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-posix:3.0.44.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-constants:0.9.9.classpath"/>
+    <path refid="library.maven:_org.jooq:jool:0.9.12.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.5.1.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-sync:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:bson:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-core:3.8.0.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client-netty-utils:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-http:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:linux-x86_64:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.reactivestreams:reactive-streams:1.0.0.classpath"/>
+    <path refid="library.maven:_com.typesafe.netty:netty-reactive-streams:2.0.0-m1.classpath"/>
+    <path refid="library.maven:_org.ocpsoft.prettytime:prettytime:3.2.7.final.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:21.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-buffer:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-unix-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_org.apache.bcel:bcel:5.2.classpath"/>
+    <path refid="library.maven:_jakarta-regexp:jakarta-regexp:1.4.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp:2.6.1.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.41.classpath"/>
+    <path refid="library.maven:_org.json:json:20141113.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.3.1.classpath"/>
+    <path refid="library.maven:_org.msgpack:msgpack:0.6.12.classpath"/>
+    <path refid="library.maven:_com.googlecode.json-simple:json-simple:1.1.1.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-jdk14:1.7.10.classpath"/>
+  </path>
+  
+  <path id="acun.runtime.production.module.classpath">
+    <pathelement location="${acun.output.dir}"/>
+    <path refid="library.maven:_com.datastax.cassandra:cassandra-driver-core:3.6.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-handler:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.dropwizard.metrics:metrics-core:3.2.2.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-ffi:2.1.7.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:1.2.16.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:native:1.2.16.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-commons:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-analysis:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-tree:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-util:5.0.3.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-x86asm:1.0.2.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-posix:3.0.44.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-constants:0.9.9.classpath"/>
+    <path refid="library.maven:_org.jooq:jool:0.9.12.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.5.1.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-sync:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:bson:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-core:3.8.0.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client-netty-utils:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-http:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:linux-x86_64:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.reactivestreams:reactive-streams:1.0.0.classpath"/>
+    <path refid="library.maven:_com.typesafe.netty:netty-reactive-streams:2.0.0-m1.classpath"/>
+    <path refid="library.maven:_org.ocpsoft.prettytime:prettytime:3.2.7.final.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:21.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-buffer:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-unix-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_org.apache.bcel:bcel:5.2.classpath"/>
+    <path refid="library.maven:_jakarta-regexp:jakarta-regexp:1.4.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp:2.6.1.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.41.classpath"/>
+    <path refid="library.maven:_org.json:json:20141113.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.3.1.classpath"/>
+    <path refid="library.maven:_org.msgpack:msgpack:0.6.12.classpath"/>
+    <path refid="library.maven:_com.googlecode.json-simple:json-simple:1.1.1.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-jdk14:1.7.10.classpath"/>
+  </path>
+  
+  <path id="acun.module.classpath">
+    <path refid="${module.jdk.classpath.acun}"/>
+    <pathelement location="${acun.output.dir}"/>
+    <path refid="library.maven:_com.datastax.cassandra:cassandra-driver-core:3.6.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-handler:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.dropwizard.metrics:metrics-core:3.2.2.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-ffi:2.1.7.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:1.2.16.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:native:1.2.16.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-commons:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-analysis:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-tree:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-util:5.0.3.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-x86asm:1.0.2.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-posix:3.0.44.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-constants:0.9.9.classpath"/>
+    <path refid="library.maven:_org.jooq:jool:0.9.12.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.5.1.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-sync:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:bson:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-core:3.8.0.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client-netty-utils:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-http:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:linux-x86_64:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.reactivestreams:reactive-streams:1.0.0.classpath"/>
+    <path refid="library.maven:_com.typesafe.netty:netty-reactive-streams:2.0.0-m1.classpath"/>
+    <path refid="library.maven:_org.ocpsoft.prettytime:prettytime:3.2.7.final.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:21.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-buffer:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-unix-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_org.apache.bcel:bcel:5.2.classpath"/>
+    <path refid="library.maven:_jakarta-regexp:jakarta-regexp:1.4.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp:2.6.1.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.41.classpath"/>
+    <path refid="library.maven:_org.json:json:20141113.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.3.1.classpath"/>
+    <path refid="library.maven:_org.msgpack:msgpack:0.6.12.classpath"/>
+    <path refid="library.maven:_com.googlecode.json-simple:json-simple:1.1.1.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-jdk14:1.7.10.classpath"/>
+  </path>
+  
+  <path id="acun.runtime.module.classpath">
+    <pathelement location="${acun.testoutput.dir}"/>
+    <pathelement location="${acun.output.dir}"/>
+    <path refid="library.maven:_com.datastax.cassandra:cassandra-driver-core:3.6.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-handler:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec:4.0.56.final.classpath"/>
+    <path refid="library.maven:_io.dropwizard.metrics:metrics-core:3.2.2.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.25.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-ffi:2.1.7.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:1.2.16.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jffi:native:1.2.16.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-commons:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-analysis:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-tree:5.0.3.classpath"/>
+    <path refid="library.maven:_org.ow2.asm:asm-util:5.0.3.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-x86asm:1.0.2.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-posix:3.0.44.classpath"/>
+    <path refid="library.maven:_com.github.jnr:jnr-constants:0.9.9.classpath"/>
+    <path refid="library.maven:_org.jooq:jool:0.9.12.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:3.5.1.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-sync:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:bson:3.8.0.classpath"/>
+    <path refid="library.maven:_org.mongodb:mongodb-driver-core:3.8.0.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_org.asynchttpclient:async-http-client-netty-utils:2.1.0-alpha19.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-http:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:linux-x86_64:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-resolver:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-codec-dns:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.reactivestreams:reactive-streams:1.0.0.classpath"/>
+    <path refid="library.maven:_com.typesafe.netty:netty-reactive-streams:2.0.0-m1.classpath"/>
+    <path refid="library.maven:_org.ocpsoft.prettytime:prettytime:3.2.7.final.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:21.0.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-epoll:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-buffer:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport-native-unix-common:4.1.11.final.classpath"/>
+    <path refid="library.maven:_io.netty:netty-transport:4.1.11.final.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.0.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.0.1.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.1.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.3.classpath"/>
+    <path refid="library.maven:_org.apache.bcel:bcel:5.2.classpath"/>
+    <path refid="library.maven:_jakarta-regexp:jakarta-regexp:1.4.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-lang3:3.5.classpath"/>
+    <path refid="library.maven:_com.zaxxer:hikaricp:2.6.1.classpath"/>
+    <path refid="library.maven:_mysql:mysql-connector-java:5.1.41.classpath"/>
+    <path refid="library.maven:_org.json:json:20141113.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.3.1.classpath"/>
+    <path refid="library.maven:_org.msgpack:msgpack:0.6.12.classpath"/>
+    <path refid="library.maven:_com.googlecode.json-simple:json-simple:1.1.1.classpath"/>
+    <path refid="library.maven:_org.javassist:javassist:3.18.1-ga.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-core:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-databind:2.8.2.classpath"/>
+    <path refid="library.maven:_com.fasterxml.jackson.core:jackson-annotations:2.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-jdk14:1.7.10.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.acun">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.acun">
+    <patternset refid="excluded.from.module.acun"/>
+  </patternset>
+  
+  <path id="acun.module.sourcepath">
+    <dirset dir="${module.acun.basedir}">
+      <include name="src/main/java/main"/>
+      <include name="src/main/java/jse"/>
+      <include name="src/main/java/core"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.acun" depends="compile.module.acun.production,compile.module.acun.tests" description="Compile module Acun"/>
+  
+  <target name="compile.module.acun.production" depends="register.custom.compilers" description="Compile module Acun; production classes">
+    <mkdir dir="${acun.output.dir}"/>
+    <javac2 destdir="${acun.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.acun}/javac">
+      <compilerarg line="${compiler.args.acun}"/>
+      <bootclasspath refid="acun.module.bootclasspath"/>
+      <classpath refid="acun.module.production.classpath"/>
+      <src refid="acun.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.acun"/>
+    </javac2>
+    
+    <copy todir="${acun.output.dir}">
+      <fileset dir="${module.acun.basedir}/src/main/java/main">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.acun.basedir}/src/main/java/jse">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.acun.basedir}/src/main/java/core">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.acun.tests" depends="register.custom.compilers,compile.module.acun.production" description="compile module Acun; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.acun" description="cleanup module">
+    <delete dir="${acun.output.dir}"/>
+    <delete dir="${acun.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.acun, clean.artifact.acun:jar" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.acun" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.acun:jar" value="${basedir}/out/artifacts/Acun_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.Acun.jar" value="${artifacts.temp.dir}/Acun.jar"/>
+  </target>
+  
+  <target name="clean.artifact.acun:jar" description="clean Acun:jar artifact output">
+    <delete dir="${artifact.output.acun:jar}"/>
+  </target>
+  
+  <target name="artifact.acun:jar" depends="init.artifacts, compile.module.acun" description="Build &#39;Acun:jar&#39; artifact">
+    <mkdir dir="${artifact.output.acun:jar}"/>
+    <jar destfile="${temp.jar.path.Acun.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${acun.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.Acun.jar}" tofile="${artifact.output.acun:jar}/Acun.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/google/code/gson/gson/2.3.1/gson-2.3.1.jar" tofile="${artifact.output.acun:jar}/gson-2.3.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/apache/commons/commons-lang3/3.5/commons-lang3-3.5.jar" tofile="${artifact.output.acun:jar}/commons-lang3-3.5.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/json/json/20141113/json-20141113.jar" tofile="${artifact.output.acun:jar}/json-20141113.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/jakarta-regexp/jakarta-regexp/1.4/jakarta-regexp-1.4.jar" tofile="${artifact.output.acun:jar}/jakarta-regexp-1.4.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/apache/bcel/bcel/5.2/bcel-5.2.jar" tofile="${artifact.output.acun:jar}/bcel-5.2.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/apache/httpcomponents/httpclient/4.0.1/httpclient-4.0.1.jar" tofile="${artifact.output.acun:jar}/httpclient-4.0.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/apache/httpcomponents/httpcore/4.0.1/httpcore-4.0.1.jar" tofile="${artifact.output.acun:jar}/httpcore-4.0.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" tofile="${artifact.output.acun:jar}/commons-logging-1.1.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/commons-codec/commons-codec/1.3/commons-codec-1.3.jar" tofile="${artifact.output.acun:jar}/commons-codec-1.3.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" tofile="${artifact.output.acun:jar}/json-simple-1.1.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/javassist/javassist/3.18.1-GA/javassist-3.18.1-GA.jar" tofile="${artifact.output.acun:jar}/javassist-3.18.1-GA.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.8.2/jackson-datatype-jdk8-2.8.2.jar" tofile="${artifact.output.acun:jar}/jackson-datatype-jdk8-2.8.2.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/fasterxml/jackson/core/jackson-core/2.8.2/jackson-core-2.8.2.jar" tofile="${artifact.output.acun:jar}/jackson-core-2.8.2.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/fasterxml/jackson/core/jackson-databind/2.8.2/jackson-databind-2.8.2.jar" tofile="${artifact.output.acun:jar}/jackson-databind-2.8.2.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/fasterxml/jackson/core/jackson-annotations/2.8.0/jackson-annotations-2.8.0.jar" tofile="${artifact.output.acun:jar}/jackson-annotations-2.8.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/google/guava/guava/21.0/guava-21.0.jar" tofile="${artifact.output.acun:jar}/guava-21.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/ocpsoft/prettytime/prettytime/3.2.7.Final/prettytime-3.2.7.Final.jar" tofile="${artifact.output.acun:jar}/prettytime-3.2.7.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/zaxxer/HikariCP/2.6.1/HikariCP-2.6.1.jar" tofile="${artifact.output.acun:jar}/HikariCP-2.6.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar" tofile="${artifact.output.acun:jar}/mysql-connector-java-5.1.41.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/slf4j/slf4j-jdk14/1.7.10/slf4j-jdk14-1.7.10.jar" tofile="${artifact.output.acun:jar}/slf4j-jdk14-1.7.10.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-buffer/4.1.11.Final/netty-buffer-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-buffer-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-transport-native-epoll/4.1.11.Final/netty-transport-native-epoll-4.1.11.Final-linux-x86_64.jar" tofile="${artifact.output.acun:jar}/netty-transport-native-epoll-4.1.11.Final-linux-x86_64.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/asynchttpclient/async-http-client-netty-utils/2.1.0-alpha19/async-http-client-netty-utils-2.1.0-alpha19.jar" tofile="${artifact.output.acun:jar}/async-http-client-netty-utils-2.1.0-alpha19.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/reactivestreams/reactive-streams/1.0.0/reactive-streams-1.0.0.jar" tofile="${artifact.output.acun:jar}/reactive-streams-1.0.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/google/protobuf/protobuf-java/3.5.1/protobuf-java-3.5.1.jar" tofile="${artifact.output.acun:jar}/protobuf-java-3.5.1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/mongodb/mongodb-driver-sync/3.8.0/mongodb-driver-sync-3.8.0.jar" tofile="${artifact.output.acun:jar}/mongodb-driver-sync-3.8.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/msgpack/msgpack/0.6.12/msgpack-0.6.12.jar" tofile="${artifact.output.acun:jar}/msgpack-0.6.12.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-transport-native-epoll/4.1.11.Final/netty-transport-native-epoll-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-transport-native-epoll-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-resolver-dns/4.1.11.Final/netty-resolver-dns-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-resolver-dns-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-common/4.1.11.Final/netty-common-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-common-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/jooq/jool/0.9.12/jool-0.9.12.jar" tofile="${artifact.output.acun:jar}/jool-0.9.12.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/mongodb/bson/3.8.0/bson-3.8.0.jar" tofile="${artifact.output.acun:jar}/bson-3.8.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-resolver/4.1.11.Final/netty-resolver-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-resolver-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-codec-http/4.1.11.Final/netty-codec-http-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-codec-http-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar" tofile="${artifact.output.acun:jar}/slf4j-api-1.7.25.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-transport-native-unix-common/4.1.11.Final/netty-transport-native-unix-common-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-transport-native-unix-common-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/mongodb/mongodb-driver-core/3.8.0/mongodb-driver-core-3.8.0.jar" tofile="${artifact.output.acun:jar}/mongodb-driver-core-3.8.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-transport/4.1.11.Final/netty-transport-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-transport-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/typesafe/netty/netty-reactive-streams/2.0.0-M1/netty-reactive-streams-2.0.0-M1.jar" tofile="${artifact.output.acun:jar}/netty-reactive-streams-2.0.0-M1.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-codec-dns/4.1.11.Final/netty-codec-dns-4.1.11.Final.jar" tofile="${artifact.output.acun:jar}/netty-codec-dns-4.1.11.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/asynchttpclient/async-http-client/2.1.0-alpha19/async-http-client-2.1.0-alpha19.jar" tofile="${artifact.output.acun:jar}/async-http-client-2.1.0-alpha19.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/github/jnr/jffi/1.2.16/jffi-1.2.16.jar" tofile="${artifact.output.acun:jar}/jffi-1.2.16.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/github/jnr/jffi/1.2.16/jffi-1.2.16-native.jar" tofile="${artifact.output.acun:jar}/jffi-1.2.16-native.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/github/jnr/jnr-ffi/2.1.7/jnr-ffi-2.1.7.jar" tofile="${artifact.output.acun:jar}/jnr-ffi-2.1.7.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/github/jnr/jnr-x86asm/1.0.2/jnr-x86asm-1.0.2.jar" tofile="${artifact.output.acun:jar}/jnr-x86asm-1.0.2.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/dropwizard/metrics/metrics-core/3.2.2/metrics-core-3.2.2.jar" tofile="${artifact.output.acun:jar}/metrics-core-3.2.2.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-codec/4.0.56.Final/netty-codec-4.0.56.Final.jar" tofile="${artifact.output.acun:jar}/netty-codec-4.0.56.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/io/netty/netty-handler/4.0.56.Final/netty-handler-4.0.56.Final.jar" tofile="${artifact.output.acun:jar}/netty-handler-4.0.56.Final.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/github/jnr/jnr-posix/3.0.44/jnr-posix-3.0.44.jar" tofile="${artifact.output.acun:jar}/jnr-posix-3.0.44.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/github/jnr/jnr-constants/0.9.9/jnr-constants-0.9.9.jar" tofile="${artifact.output.acun:jar}/jnr-constants-0.9.9.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/com/datastax/cassandra/cassandra-driver-core/3.6.0/cassandra-driver-core-3.6.0.jar" tofile="${artifact.output.acun:jar}/cassandra-driver-core-3.6.0.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/ow2/asm/asm-commons/5.0.3/asm-commons-5.0.3.jar" tofile="${artifact.output.acun:jar}/asm-commons-5.0.3.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/ow2/asm/asm-tree/5.0.3/asm-tree-5.0.3.jar" tofile="${artifact.output.acun:jar}/asm-tree-5.0.3.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/ow2/asm/asm-util/5.0.3/asm-util-5.0.3.jar" tofile="${artifact.output.acun:jar}/asm-util-5.0.3.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/ow2/asm/asm/5.0.3/asm-5.0.3.jar" tofile="${artifact.output.acun:jar}/asm-5.0.3.jar"/>
+    <copy file="${path.variable.maven_reposıtory}/org/ow2/asm/asm-analysis/5.0.3/asm-analysis-5.0.3.jar" tofile="${artifact.output.acun:jar}/asm-analysis-5.0.3.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.acun:jar" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
